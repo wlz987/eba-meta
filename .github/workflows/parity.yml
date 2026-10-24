@@ -1,0 +1,24 @@
+name: parity
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: wlz987/eba-py
+          path: eba-py
+      - uses: actions/checkout@v4
+        with:
+          repository: wlz987/eba-ts
+          path: eba-ts
+      - uses: actions/checkout@v4
+        with:
+          repository: wlz987/eba-rs
+          path: eba-rs
+      - run: python3 parity.py
