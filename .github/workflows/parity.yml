@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  examples:
+  parity:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,4 +21,15 @@ jobs:
         with:
           repository: wlz987/eba-rs
           path: eba-rs
-      - run: python3 parity.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: dtolnay/rust-toolchain@stable
+      - run: python3 tools/examples.py
+      - run: python3 tools/structure.py
+      - run: python3 tools/api.py
+      - run: python3 tools/duplicate.py
+      - run: python3 tools/diff-examples.py
